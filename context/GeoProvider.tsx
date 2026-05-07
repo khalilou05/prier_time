@@ -1,4 +1,6 @@
+"use client";
 import { headers } from "next/dist/server/request/headers";
+import { ReadonlyHeaders } from "next/dist/server/web/spec-extension/adapters/headers";
 import { createContext, use } from "react";
 
 type GeoMetaData = {
@@ -10,7 +12,13 @@ type GeoMetaData = {
 
 const Provider = createContext<GeoMetaData | null>(null);
 
-export function GeoProvider({ children }: { children: React.ReactNode }) {
+export function GeoProvider({
+  children,
+  promise,
+}: {
+  children: React.ReactNode;
+  promise: Promise<ReadonlyHeaders>;
+}) {
   const header = use(headers());
   const geo = {
     latitude: parseFloat(header.get("x-vercel-ip-latitude") || "0"),

@@ -1,7 +1,7 @@
 import { SidebarProvider } from "@/components/ui/sidebar";
 
+import GeoServerComp from "@/components/GeoServerComp";
 import { AppSidebar } from "@/components/app-sidebar";
-import { GeoProvider } from "@/context/GeoProvider";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -34,10 +34,10 @@ export default function RootLayout({
     >
       <body>
         <SidebarProvider>
-          <GeoProvider>
+          <GeoServerComp>
             <AppSidebar />
             {children}
-          </GeoProvider>
+          </GeoServerComp>
         </SidebarProvider>
       </body>
     </html>
