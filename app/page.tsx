@@ -10,7 +10,7 @@ export default function Home() {
       <p>Country: {country}</p>
       <p>Latitude: {latitude}</p>
       <p>Longitude: {longitude}</p>
-      <p>City: {city}</p>
+      <p>City: {decodeURI(city)}</p>
     </div>
   );
 }
