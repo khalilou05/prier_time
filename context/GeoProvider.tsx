@@ -1,5 +1,4 @@
-"use client";
-import { ReadonlyHeaders } from "next/dist/server/web/spec-extension/adapters/headers";
+import { headers } from "next/dist/server/request/headers";
 import { createContext, use } from "react";
 
 type GeoMetaData = {
@@ -11,19 +10,13 @@ type GeoMetaData = {
 
 const Provider = createContext<GeoMetaData | null>(null);
 
-export function GeoProvider({
-  children,
-  promise,
-}: {
-  children: React.ReactNode;
-  promise: Promise<ReadonlyHeaders>;
-}) {
-  const headers = use(promise);
+export function GeoProvider({ children }: { children: React.ReactNode }) {
+  const header = use(headers());
   const geo = {
-    latitude: parseFloat(headers.get("x-vercel-ip-latitude") || "0"),
-    longitude: parseFloat(headers.get("x-vercel-ip-longitude") || "0"),
-    city: headers.get("x-vercel-ip-city") || "Unknown",
-    country: headers.get("x-vercel-ip-country") || "Unknown",
+    latitude: parseFloat(header.get("x-vercel-ip-latitude") || "0"),
+    longitude: parseFloat(header.get("x-vercel-ip-longitude") || "0"),
+    city: header.get("x-vercel-ip-city") || "Unknown",
+    country: header.get("x-vercel-ip-country") || "Unknown",
   };
   return <Provider value={geo}>{children}</Provider>;
 }
