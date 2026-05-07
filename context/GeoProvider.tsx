@@ -1,5 +1,5 @@
 "use client";
-import { headers } from "next/dist/server/request/headers";
+
 import { ReadonlyHeaders } from "next/dist/server/web/spec-extension/adapters/headers";
 import { createContext, use } from "react";
 
@@ -19,7 +19,7 @@ export function GeoProvider({
   children: React.ReactNode;
   promise: Promise<ReadonlyHeaders>;
 }) {
-  const header = use(headers());
+  const header = use(promise);
   const geo = {
     latitude: parseFloat(header.get("x-vercel-ip-latitude") || "0"),
     longitude: parseFloat(header.get("x-vercel-ip-longitude") || "0"),
