@@ -32,6 +32,7 @@ export default async function RootLayout({
     country: header.get("x-vercel-ip-country") || "Unknown",
     latitude: parseFloat(header.get("x-vercel-ip-latitude") || "0"),
     longitude: parseFloat(header.get("x-vercel-ip-longitude") || "0"),
+    city: header.get("x-vercel-ip-city") || "Unknown",
   };
 
   return (

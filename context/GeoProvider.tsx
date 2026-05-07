@@ -4,6 +4,7 @@ import { createContext, use } from "react";
 type GeoMetaData = {
   latitude: number;
   longitude: number;
+  city: string;
   country: string;
 };
 
