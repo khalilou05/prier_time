@@ -27,14 +27,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const header = await headers();
-  const geo = {
-    country: header.get("x-vercel-ip-country") || "Unknown",
-    latitude: parseFloat(header.get("x-vercel-ip-latitude") || "0"),
-    longitude: parseFloat(header.get("x-vercel-ip-longitude") || "0"),
-    city: header.get("x-vercel-ip-city") || "Unknown",
-  };
-
   return (
     <html
       lang="ar"
@@ -42,7 +34,7 @@ export default async function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
       <body>
-        <GeoProvider value={geo}>
+        <GeoProvider promise={headers()}>
           <SidebarProvider>
             <AppSidebar />
             {children}
